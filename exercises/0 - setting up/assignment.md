@@ -1,18 +1,23 @@
 Assignment 0: setting up an angular application with angular-cli
 ================================================================
 
-## To quickly start with this repo and it's assignments run the following commands:
-
-- npm install
-- ng serve
-- open the url http://localhost:4200 in a browser
-- start with excercise 01
-
 ## Prerequisites
 
 - An editor, we prefer Visual Studio Code
 - LTS versions of NodeJS and NPM
 - TypeScript
+
+## Quickstart
+
+To quickly start with this repo and it's assignments run the following commands:
+
+```
+npm install --legacy-peer-deps
+ng serve
+```
+
+- open the url http://localhost:4200 in a browser
+- start with excercise 01
 
 ## Nice to haves
 

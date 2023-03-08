@@ -16,10 +16,20 @@ Assignment 7: Retreiving data with a service
 - Create a public function `getMovies` in our new `movie.service` which will return the `movies` array as currently defined in our movies component, in other words, move the hardcoded movies array from the `movies.component` to the `MovieService.getMovies`.
 - Add the `MovieService` in the constructor of the movies component as a private property `movieService` with the typing `MovieService`. 
     - By doing this, you are effectively telling the DI framework of Angular to inject the instance of the `MovieService`.
-- Notice the `OnInit` interface in the movies component which has been implemented onto the class declaration.
+- Import the `OnInit` interface in the movies component from `@angular/core` and implement this in the `MoviesComponent` class declaration in case this hasn't been done yet (example below).
 - Retreive the movies in the `ngOnInit` function from the `movieService`, and assign it to our public `movies` property.
 - Remove the hardcoded movies array from the movie component if you haven't done so yet, as we are now fetching them with the service.
 - To actually use the service, we need to tell the Angular DI that it exists by providing it. By default, the Angular CLI command `ng g service movies/movie` registers a provider with the root injector for our service by including provider metadata in the @Injectable() decorator. Angular will create a single, shared instance of MovieService and injects it into any class that asks for it. So we're all set.
+
+**Example**:
+
+``` typescript
+export class MoviesComponent implements OnInit {
+  ngOnInit(): void {
+    // retreive movies...
+  }
+}
+```
 
 **Result**:
 > We provided a Movie service at the default root level, Angular creates a single, shared instance of our service and injects it into any class that asks for it.
