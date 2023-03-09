@@ -1,6 +1,13 @@
 Assignment 0: setting up an angular application with angular-cli
 ================================================================
 
+  **Links**:
+- [vs code](https://code.visualstudio.com)
+- [nodejs & npm](https://nodejs.org/en/)
+- [typescript](https://www.typescriptlang.org/docs/tutorial.html)
+- [angular-cli](https://cli.angular.io/)
+- [angular docs](https://angular.io/docs/ts/latest/)
+
 ## Prerequisites
 
 - An editor, we prefer Visual Studio Code
@@ -26,12 +33,5 @@ When you want to work with Angular-CLI / TypeScript on a regular basis install t
 - npm install -g @angular/cli
     - now you can start an Angular project anywhere you want like `ng new my-angular-project`
 - `npm install -g typescript`
-
- **Links**:
-- [vs code](https://code.visualstudio.com)
-- [nodejs & npm](https://nodejs.org/en/)
-- [typescript](https://www.typescriptlang.org/docs/tutorial.html)
-- [angular-cli](https://cli.angular.io/)
-- [angular docs](https://angular.io/docs/ts/latest/)
 
 
