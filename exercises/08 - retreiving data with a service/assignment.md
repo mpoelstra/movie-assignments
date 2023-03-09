@@ -17,7 +17,7 @@ Assignment 8: Getting movies from a remote server
 **Steps**:
 - Notice the `HttpClientModule` from `'@angular/common/http'` in the `app.module` file and that it is part of the `imports` array of the module.
 - Import the `HttpClient` service from `'@angular/common/http'` into the `movie.service`.
-- Add a parameter `http` to the constructor and type it as `HttpClient`.
+- Add a __private__ parameter `http` to the constructor and type it as `HttpClient`.
 - Declare two private properties `moviesUrl` and `moviesFavUrl` in the `movie.service` and assign the values `'api/movies'` and `'api/moviesFav'` to them.
 >  We will edit the `getMovies` function to use the `httpClient` to asynchronously get the remote movie data:
 - Remove the hardcoded array of movies from the `getMovies` function.
