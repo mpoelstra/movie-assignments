@@ -1,27 +1,34 @@
-Assignment 9: Processing user input
+Assignment 9: Processing user input with two-way binding
 ==============================================
 
-> ## Extend the movie detail component so you can edit the properties of a movie and reflect it back to the model
+> ## Add editable form inputs to the movie detail component
 
 **Links**:
-- [two way binding](https://angular.io/guide/two-way-binding)
-- [two way binding with ngmodel directive](https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/wpf-to-angular-guide/two-way-binding)
-- [ngmodel api](https://angular.io/docs/ts/latest/api/forms/index/NgModel-directive.html)
-- [user input events](https://angular.io/docs/ts/latest/guide/user-input.html)
-- [cloning with object.assign](https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+- [Two-way Binding](https://angular.io/guide/two-way-binding)
+- [NgModel Directive](https://angular.io/api/forms/NgModel)
+- [FormsModule](https://angular.io/api/forms/FormsModule)
 
 **Steps**:
-- Add two input fields of type `text` (name and genre) to the movie-detail component template and one of type `number` (rating), inside the root `div` element.
-> The `ngModel` directive is exported from the `FormModule` and can be used as syntactic sugar for 'two way binding' with input elements.
-- The `NgModel` directive is exported from the `FormsModule` located in `@angular/forms`. Add this module to the `imports` array of the movies module.
-- Use the `ngModel` directive to two way bind the inputs to the name, genre and rating properties of the movie object.
-> Test it in the browser and see what happens. 
-- *testing testing.. wtf..?*
-> Oops, we don't want the changes to directly be reflected in the movie list as well, so we need to decouple its model.
-- In the movies component, use the `Object.assign` or the JavaScript `spread` operator to clone the movie ($event) parameter. Set the `selectedMovie` property to the cloned object.
+- Import `FormsModule` from `@angular/forms` and add it to the imports array of the movie-detail component.
 
-**Extra**:
-- As an **extra** functionality, we want to clear the `genre` input when the user presses the escape button
+- Add input fields to the movie-detail component template for name (text), genre (text), and rating (number).
+  - Add proper labels for accessibility.
+  - Use the `[(ngModel)]` directive to create two-way binding to the movie properties.
+  - Remember to access movie as a function: `[(ngModel)]="movie().name"`.
+> The `[(ngModel)]` syntax creates two-way binding - changes in the input update the model, and model changes update the input.
+
+- Test the application and notice changes are immediately reflected in the list.
+> This happens because the same movie object reference is shared.
+
+- To prevent unwanted side effects, clone the movie when selecting it:
+  - In the movies component's `onMovieSelected` function, use the spread operator to clone the movie: `{...movie}`.
+  - Alternative: Use `Object.assign({}, movie)` or `structuredClone(movie)`.
+
+- Optional: Add keyboard event handling to clear the genre on Escape key press.
+  - Hint: Use `(keyup.escape)="movie().genre = ''"` on the genre input.
+
+**Understanding Two-Way Binding**:
+> `[(ngModel)]` is syntactic sugar combining property binding `[]` and event binding `()`.
 
 **Result**:
-> We are now able to reflect the user input to the model and vice versa via two way binding and the ngModel directive
+> The movie detail component now accepts user input through two-way bound form fields. Object cloning prevents unintended side effects while editing.

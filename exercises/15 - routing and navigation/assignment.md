@@ -1,30 +1,44 @@
-Assignment 15: Navigation links and redirecting to another route
+Assignment 15: Routing between views
 ==============================================
 
-> ### Set the dashboard component as default route in app component 
-> ### and add navigation links for the movies and dashboard route
+> ## Configure routing to navigate between different views in the application
 
 **Links**:
-- [redirecting to another Route](https://angular-2-training-book.rangle.io/handout/routing/redirects.html)
-- [routing and navigation](https://angular.io/docs/ts/latest/guide/router.html)
-- [routing links](https://angular-2-training-book.rangle.io/handout/routing/routerlink.html)
-- [routerLink directive](https://angular.io/docs/ts/latest/api/router/index/RouterLink-directive.html)
+- [Angular Router Guide](https://angular.io/guide/router)
+- [Routing Tutorial](https://angular.io/guide/router-tutorial)
+- [Route Configuration](https://angular.io/api/router/Route)
+- [Router Outlet](https://angular.io/api/router/RouterOutlet)
+- [provideRouter](https://angular.io/api/router/provideRouter)
+
+**Background**:
+> Angular's router enables navigation between different views. In modern Angular, we use the `provideRouter` function instead of RouterModule imports.
 
 **Steps**:
-- Add a root level RoutingModule to the application `app-routing.module.ts`.
-- Define the `routes` constant as an array with one object literal in it (a Route config object);
-  - Set the `path` property of the Route config object to an empty string `''`;
-  - Set the `redirectTo` property of the Route config object to the route `'dashboard'`;
-  - Set the `pathMatch` property of the Route config object to `'full'`;
-- Don't forget to import the `AppRoutingModule` in the app module to the ***end*** of the imports array
+- Verify that `index.html` has `<base href="/">` in the `<head>` section (it should already be there).
 
-> We can now add navigation for our routes
-- Add a `<nav>` element to the app component template;
-- Add an unordered list to the template `<ul>` with two list items `<li>`;
-- Insert an anchor element `<a>` to the first `<li>` with the text `Movies`;
- - Add a `routerLink` directive to the anchor element and set its value to `/movies`;
-- Repeat the above step for `/dashboard`;
+- Open `/src/app/app.routes.ts` and define routes:
+  - Import the `Routes` type from `@angular/router`.
+  - Import `MoviesComponent` from its location.
+  - Add a route for the movies component with path `'movies'`.
+  - Add a default route with empty path that redirects to `'/movies'` with `pathMatch: 'full'`.
+
+- Verify that `app.config.ts` includes `provideRouter(routes)` in the providers array (it should already be there).
+
+- Update the app component:
+  - Remove the `<cw-movies>` component from `app.component.html`.
+  - Add a `<router-outlet>` element where you want routed components to appear.
+  - Import `RouterOutlet` from `@angular/router` and add it to the app component's imports array.
+
+- Update the movies component:
+  - The component no longer needs to be imported directly in AppComponent.
+
+- Test the routing:
+  - Navigate to `http://localhost:4200/` - should redirect to `/movies`
+  - Navigate to `http://localhost:4200/movies` - should show the movies list and detail view
+
+**Understanding Router Outlet**:
+> The `<router-outlet>` acts as a placeholder where the router inserts the component for the current route.
 
 **Result**:
-> When you now navigate to the empty route `localhost:4200`, the router will automatically redirect to the `dashboard` route.
-> Also, the movies and dashboard components are now accessible via navigation links.
+> The application now uses routing to display different views. The root URL redirects to the movies route.
+> In assignment 16, we'll create additional feature modules with their own routes.

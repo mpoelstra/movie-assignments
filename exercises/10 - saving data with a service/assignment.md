@@ -1,50 +1,44 @@
-Assignment 10: saving data with a service
+Assignment 10: Saving data with HTTP PUT
 ==============================================
 
-> ## Use the angular http service to save the movie details input to a remote/stub server
-
-> The stub server we set up is also able to 'save' data by means of a http put (edit) or post (create) call.
+> ## Add the ability to save edited movie data back to the server
 
 **Links**:
-- [angular http client](https://angular.io/guide/http)
-- [rxjs](http://reactivex.io/rxjs/manual/overview.html#introduction)
-- [rxjs observable](http://reactivex.io/documentation/observable.html)
-- [using observables](https://angular-training-guide.rangle.io/observables/using_observables)
-- [typescript generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
-- [template literals](https://developer.chrome.com/blog/es6-template-strings/)
+- [Angular HttpClient](https://angular.io/guide/http)
+- [HTTP PUT Request](https://angular.io/guide/http#making-a-put-request)
+- [RxJS Operators](https://rxjs.dev/guide/operators)
 
 **Steps**:
-- Add an `updateMovie` function to the `movie.service`, that receives one parameter `movie`.
-- Create a local variable `url` in `updateMovie`, that combines the `moviesUrl` with a `/` and then `movie.id`. So if `id` is `1`, the end result will be `api/movies/1`.
-> We have to tell the 'api' what type of payload we are sending. We do this by sending an httpheader that says our payload is json:
-- Create an `options` variable with value : `{ headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }`
-- call the `put` function on the `http` service, supply the `url` as first parameter, then the `movie` and lastly the `options`.
-- Let the `updateMovie` return the `Observable` result from the call to `put`.
+- Add an `updateMovie` function to the `movie.service` that receives one parameter `movie`.
+- Create a local variable `url` in `updateMovie` that combines the `moviesUrl` with `/` and `movie.id`.
+  - Hint: Use template literals: `` `${this.moviesUrl}/${movie.id}` ``
 
-> Now we want the data to be stored when we press a save button:
-- Add a button element to the template of the `movie-details.component`, beneath the input fields. The button has the text `Save..` and a binding to it's `click` event. The `click` event is bound to a function `onSaveClicked`.
-- Add the `onSaveClicked` function to the movie detail component.
-> We want the `movie-detail.component` to remain stateless, i.e. not know anything about retreiving or saving data to a server, so we will let our parent handle the actual saving:
-- Import the `Output` and `EventEmitter` from `@angular/core` in the `movie-detail.component`, create an `@Output()` property `save` and set its value to a new `EventEmitter`.
-- Call the `emit` function on `save` in the `onSaveClicked` method with the property `movie` as single argument.
-- Add an event binding to our `save` event in the template of the `movies.component` and bind it to a `onMovieSaved` function. don't forget the `$event` parameter.
- - Add the `onSaveMovie` function to the movies component. Make the `onMovieSaved` function call `updateMovie` of the `movie.service`.
- - `updateMovie` will return an `Observable`, so chain a call to the `subscribe` function and supply an observer object (like we did in assignment 8) as argument and implement the next handler. For instance write `console.log('succes')` in this handler.
- > Now that the data is saved, we want the list to update as well.
- - Extract the code from the `ngOnInit` function in `movies.component.ts` to a new function `getMovies` in the movies component.
- - Call `getMovies` in the `ngOnInit` to make it work again. 
- > Now we can re-use the code we extracted (you should not manually call the `ngOnInit` function because it is a lifecycle hook). 
-- Now also call `getMovies` inside the next handler we supplied to the observer of the `subscribe` function. (you can leave the console.log if you want)
- > 'In real life' after editing a movie, we would often return to an overview page and retreive the updated list data there.
+- Create an `options` variable with HTTP headers:
+  - Import `HttpHeaders` from `@angular/common/http`.
+  - Set value: `{ headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }`
 
+- Call the `put` function on the `http` service with `url`, `movie`, and `options` as parameters.
+- Use `.pipe()` with `map()` to return the movie (the server may return empty).
+  - Import `map` from `'rxjs/operators'`.
+- Add `catchError(this.handleError)` to the pipe chain.
+- Let the `updateMovie` function return the Observable result.
 
-**Extra**
-> We are now directly passing the result from the server the component. We don't want this, because a component should not know anything about communicating with a server. We want to pick up the response from the server in our `movie.service`, mabe do something with it and then pass a custom result to the component.
-- Chain a `map` function (with `.pipe()`) to the `put` in `movie.service` to intercept the response of the server and do something with it.
-> The server can return nothing (or sometimes the movie itself), or a response `204 No Content`, which means all is well but i don't have a payload for you.
-- We don't want to send an empty response back to the `movies.component`, so we will just return the `movie` object in the arrow function. This will automattically be wrapped in a new `Observable`.
-> Note: this does mean we must be able to rely on the server that the movie is stored exactly as we send it.
-- To make it complete, also add the `catchError` to the chain (pipeline) just like in `getMovies`.
+- Add a save button to the movie-detail component template with text "Save..".
+- Import the `output` function and create an output property `save` that emits a Movie.
+- Add an `onSaveClicked` function that emits the movie using `this.save.emit(this.movie())`.
+- Bind the button's click event to `onSaveClicked`.
+
+- In the movies component, handle the save event:
+  - Extract the code from `ngOnInit` to a new `getMovies()` function.
+  - Call `getMovies()` in `ngOnInit`.
+  - Create an `onMovieSaved(movie: Movie)` function that calls `movieService.updateMovie(movie)`.
+  - Subscribe to the result and call `getMovies()` in the `next` handler to refresh the list.
+
+- Update the movie-detail component usage in movies template to bind the save event:
+  - Add `(save)="onMovieSaved($event)"` to the `<cw-movie-detail>` element.
+
+**Understanding the Data Flow**:
+> User edits → Save button → Detail emits event → Container calls service → HTTP PUT → Refresh list
 
 **Result**:
-> We now asynchronously save the data of an editted movie to a remote/stub server, and update the list after the data is saved.
+> Users can now edit and save movie data. Changes persist to the server and the list updates to reflect the changes.
