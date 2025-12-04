@@ -1,17 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { Movie } from './movie.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  getMovies(): Movie[] {
-    return [
-      { id: 1, name: 'The Shawshank Redemption', genre: 'Drama', rating: 9.3 },
-      { id: 2, name: 'The Godfather', genre: 'Crime', rating: 9.2 },
-      { id: 3, name: 'The Dark Knight', genre: 'Action', rating: 9.0 },
-      { id: 4, name: 'Pulp Fiction', genre: 'Crime', rating: 8.9 },
-      { id: 5, name: 'Forrest Gump', genre: 'Drama', rating: 8.8 }
-    ];
+  private http = inject(HttpClient);
+  private moviesUrl = 'api/movies';
+  private moviesFavUrl = 'api/moviesFav';
+
+  getMovies(): Observable<Movie[]> {
+    const result = this.http.get<Movie[]>(this.moviesUrl).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+    return result;
+  }
+
+  getFavMovies(): Observable<Movie[]> {
+    const result = this.http.get<Movie[]>(this.moviesFavUrl).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+    return result;
+  }
+
+  private handleError(error: any): Observable<never> {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('Something went wrong; please try again later.'));
   }
 }

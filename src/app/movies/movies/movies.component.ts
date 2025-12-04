@@ -16,7 +16,15 @@ export class MoviesComponent implements OnInit {
   selectedMovie = signal<Movie | undefined>(undefined);
 
   ngOnInit(): void {
-    this.movies.set(this.movieService.getMovies());
+    const result = this.movieService.getMovies();
+    result.subscribe({
+      next: (movies: Movie[]) => {
+        this.movies.set(movies);
+      },
+      error: (err: Error) => {
+        console.error('Error fetching movies:', err);
+      }
+    });
   }
 
   onMovieSelected(movie: Movie): void {
