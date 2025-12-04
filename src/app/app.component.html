@@ -12,10 +12,5 @@
 </ul>
 
 @if (selectedMovie()) {
-  <div>
-    <h2>{{ selectedMovie()!.name }}</h2>
-    <div>ID: {{ selectedMovie()!.id }}</div>
-    <div>Genre: {{ selectedMovie()!.genre }}</div>
-    <div>Rating: {{ selectedMovie()!.rating }}</div>
-  </div>
+  <cw-movie-detail [movie]="selectedMovie()!"></cw-movie-detail>
 }

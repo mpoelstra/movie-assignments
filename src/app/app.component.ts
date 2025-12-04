@@ -1,9 +1,10 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { Movie } from './movies/movie.interface';
+import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
 
 @Component({
     selector: 'app-root',
-    imports: [],
+    imports: [MovieDetailComponent],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
