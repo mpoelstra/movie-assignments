@@ -1,7 +1,8 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit, inject } from '@angular/core';
 import { Movie } from '../movie.interface';
 import { MovieDetailComponent } from '../movie-detail/movie-detail.component';
 import { MovieListComponent } from '../movie-list/movie-list.component';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'cw-movies',
@@ -10,17 +11,12 @@ import { MovieListComponent } from '../movie-list/movie-list.component';
   styleUrl: './movies.component.scss',
 })
 export class MoviesComponent implements OnInit {
+  private movieService = inject(MovieService);
   movies = signal<Movie[]>([]);
   selectedMovie = signal<Movie | undefined>(undefined);
 
   ngOnInit(): void {
-    this.movies.set([
-      { id: 1, name: 'The Shawshank Redemption', genre: 'Drama', rating: 9.3 },
-      { id: 2, name: 'The Godfather', genre: 'Crime', rating: 9.2 },
-      { id: 3, name: 'The Dark Knight', genre: 'Action', rating: 9.0 },
-      { id: 4, name: 'Pulp Fiction', genre: 'Crime', rating: 8.9 },
-      { id: 5, name: 'Forrest Gump', genre: 'Drama', rating: 8.8 }
-    ]);
+    this.movies.set(this.movieService.getMovies());
   }
 
   onMovieSelected(movie: Movie): void {
