@@ -1,27 +1,110 @@
-Assignment 9: Processing user input
+Assignment 9: Processing user input with two-way binding
 ==============================================
 
-> ## Extend the movie detail component so you can edit the properties of a movie and reflect it back to the model
+> ## Add editable form inputs to the movie detail component
 
 **Links**:
-- [two way binding](https://angular.io/guide/two-way-binding)
-- [two way binding with ngmodel directive](https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/wpf-to-angular-guide/two-way-binding)
-- [ngmodel api](https://angular.io/docs/ts/latest/api/forms/index/NgModel-directive.html)
-- [user input events](https://angular.io/docs/ts/latest/guide/user-input.html)
-- [cloning with object.assign](https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+- [Two-way Binding](https://angular.io/guide/two-way-binding)
+- [NgModel Directive](https://angular.io/api/forms/NgModel)
+- [FormsModule](https://angular.io/api/forms/FormsModule)
+- [User Input](https://angular.io/guide/user-input)
 
 **Steps**:
-- Add two input fields of type `text` (name and genre) to the movie-detail component template and one of type `number` (rating), inside the root `div` element.
-> The `ngModel` directive is exported from the `FormModule` and can be used as syntactic sugar for 'two way binding' with input elements.
-- The `NgModel` directive is exported from the `FormsModule` located in `@angular/forms`. Add this module to the `imports` array of the movies module.
-- Use the `ngModel` directive to two way bind the inputs to the name, genre and rating properties of the movie object.
-> Test it in the browser and see what happens. 
-- *testing testing.. wtf..?*
-> Oops, we don't want the changes to directly be reflected in the movie list as well, so we need to decouple its model.
-- In the movies component, use the `Object.assign` or the JavaScript `spread` operator to clone the movie ($event) parameter. Set the `selectedMovie` property to the cloned object.
 
-**Extra**:
-- As an **extra** functionality, we want to clear the `genre` input when the user presses the escape button
+**1. Add FormsModule to MovieDetailComponent**
+- Import `FormsModule` in `movie-detail.component.ts`:
+```typescript
+import { Component, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Movie } from '../movie.interface';
+
+@Component({
+  selector: 'cw-movie-detail',
+  imports: [FormsModule],
+  templateUrl: './movie-detail.component.html',
+  styleUrl: './movie-detail.component.scss',
+})
+export class MovieDetailComponent {
+  movie = input.required<Movie>();
+}
+```
+
+**2. Add Form Inputs to the Template**
+- Update `movie-detail.component.html` to add input fields:
+```html
+<div>
+  <h2>{{ movie().name }}</h2>
+  <div>ID: {{ movie().id }}</div>
+  <div>Genre: {{ movie().genre }}</div>
+  <div>Rating: {{ movie().rating }}</div>
+  
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" type="text" [(ngModel)]="movie().name" />
+  </div>
+  
+  <div>
+    <label for="genre">Genre:</label>
+    <input id="genre" type="text" [(ngModel)]="movie().genre" />
+  </div>
+  
+  <div>
+    <label for="rating">Rating:</label>
+    <input id="rating" type="number" [(ngModel)]="movie().rating" />
+  </div>
+</div>
+```
+> The `[(ngModel)]` syntax creates two-way binding. Changes in the input update the model, and model changes update the input.
+
+**3. Test the Two-Way Binding**
+- Run the application and select a movie
+- Edit the name, genre, or rating in the input fields
+- Notice the changes are immediately reflected in the list above
+> This happens because the same movie object reference is shared between the list and detail components.
+
+**4. Fix Unwanted Data Sharing with Object Cloning**
+- To prevent edits from affecting the list immediately, clone the movie when selecting:
+- Update `movies.component.ts`:
+```typescript
+onMovieSelected(movie: Movie): void {
+  this.selectedMovie.set({ ...movie }); // Clone using spread operator
+}
+```
+> The spread operator `{ ...movie }` creates a shallow copy, breaking the reference between list and detail.
+
+Alternative cloning methods:
+```typescript
+// Object.assign
+this.selectedMovie.set(Object.assign({}, movie));
+
+// structuredClone (for deep cloning)
+this.selectedMovie.set(structuredClone(movie));
+```
+
+**5. Optional - Clear Genre on Escape Key**
+- Add keyboard event handling to the genre input:
+```html
+<input 
+  id="genre" 
+  type="text" 
+  [(ngModel)]="movie().genre"
+  (keyup.escape)="movie().genre = ''" 
+/>
+```
+> Angular's event binding syntax supports keyboard event filters like `.escape`, `.enter`, etc.
+
+**Understanding Two-Way Binding**:
+> `[(ngModel)]` is syntactic sugar for:
+> ```html
+> <input 
+>   [ngModel]="movie().name"
+>   (ngModelChange)="movie().name = $event"
+> />
+> ```
+> The banana-in-a-box syntax `[()]` combines property binding `[]` and event binding `()`.
+
+**Important Signal Note**:
+> When using signals with ngModel, you're binding to the signal's value (via `movie()`), not the signal itself. Direct mutations like `movie().name = 'new value'` work but don't trigger signal updates. For full reactivity, consider using reactive forms (covered in assignments 13-14).
 
 **Result**:
-> We are now able to reflect the user input to the model and vice versa via two way binding and the ngModel directive
+> The movie detail component now accepts user input through two-way bound form fields. Object cloning prevents unintended side effects while editing, ensuring the list only updates after explicitly saving changes.

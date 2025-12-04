@@ -1,8 +1,0 @@
-<ul>
-  @for (movie of movies(); track movie.id) {
-    <li>
-      {{ movie.name }} - Rating: {{ movie.rating }}
-      <button (click)="onMovieClicked(movie)">view..</button>
-    </li>
-  }
-</ul>

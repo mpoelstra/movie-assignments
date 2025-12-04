@@ -1,26 +1,71 @@
-Assignment 7: Retreiving data with a service
+Assignment 7: Retrieving data with a service
 ==============================================
 
-> ## Create a service that returns/fetches the movie data instead of hardcoding it in the component
+> ## Create a service that returns movie data, separating data management from component logic
 
 **Links**:
-- [services](https://angular.io/guide/architecture-services)
-- [services tutorial](https://angular.io/tutorial/toh-pt4)
-- [angular dependency injection](https://angular-training-guide.rangle.io/di)
-- [angular component lifecycle hooks](https://angular-training-guide.rangle.io/advanced-components/component_lifecycle)
-- [Providing services](https://angular.io/guide/architecture-services#providing-services)
+- [Angular Services](https://angular.io/guide/architecture-services)
+- [Dependency Injection](https://angular.io/guide/dependency-injection)
+- [Injectable Services](https://angular.io/guide/injectable-services)
+- [inject() Function](https://angular.io/api/core/inject)
 
 **Steps**:
-- Create a new service in the `movies` folder using the angular-cli command `ng g service movies/movie`.
-  - A `movie.service` file is generated with a minimum amount of code: a JavaScript class with an Injectable decorator.
-- Create a public function `getMovies` in our new `movie.service` which will return the `movies` array as currently defined in our movies component, in other words, move the hardcoded movies array from the `movies.component` to the `MovieService.getMovies`.
-- Add the `MovieService` using inject to the movies component as a private property `movieService` with the typing `MovieService`. 
-    - By doing this, you are effectively telling the DI framework of Angular to inject the instance of the `MovieService`.
-- Retreive the movies in the `ngOnInit` function from the `movieService`, and assign it to our public `movies` property. Also add the `OnInit` interface to the movies component class declaration.
-- Remove the hardcoded movies array from the movie component if you haven't done so yet, as we are now fetching them with the service.
-- To actually use the service, we need to tell the Angular DI that it exists by providing it. By default, the Angular CLI command `ng g service movies/movie` registers a provider with the root injector for our service by including provider metadata in the @Injectable() decorator. Angular will create a single, shared instance of MovieService and injects it into any class that asks for it. So we're all set.
+- Generate a new service in the `movies` folder:
+```bash
+ng g service movies/movie --skip-tests
+```
+> This creates `movie.service.ts` with the `@Injectable({ providedIn: 'root' })` decorator, making it a singleton available throughout the app.
+
+- Create a `getMovies` method in `movie.service.ts`:
+```typescript
+import { Injectable } from '@angular/core';
+import { Movie } from './movie.interface';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class MovieService {
+  getMovies(): Movie[] {
+    return [
+      { id: 1, name: 'The Shawshank Redemption', genre: 'Drama', rating: 9.3 },
+      { id: 2, name: 'The Godfather', genre: 'Crime', rating: 9.2 },
+      { id: 3, name: 'The Dark Knight', genre: 'Action', rating: 9.0 },
+      { id: 4, name: 'Pulp Fiction', genre: 'Crime', rating: 8.9 },
+      { id: 5, name: 'Forrest Gump', genre: 'Drama', rating: 8.8 }
+    ];
+  }
+}
+```
+
+- Inject the service in the movies component using the `inject()` function:
+```typescript
+import { Component, signal, OnInit, inject } from '@angular/core';
+import { MovieService } from '../movie.service';
+
+export class MoviesComponent implements OnInit {
+  private movieService = inject(MovieService);
+  // ... rest of properties
+}
+```
+> The `inject()` function is the modern way to inject dependencies in Angular. It's cleaner than constructor injection and works with standalone components.
+
+- Update `ngOnInit` to fetch movies from the service:
+```typescript
+ngOnInit(): void {
+  this.movies.set(this.movieService.getMovies());
+}
+```
+
+- Remove the hardcoded movie array from the component.
+
+**Dependency Injection Benefits**:
+> - **Separation of Concerns**: Components focus on presentation, services handle data
+> - **Testability**: Easy to mock services in tests
+> - **Reusability**: Multiple components can share the same service instance
+> - **Maintainability**: Data logic changes don't affect components
+
+**Why `providedIn: 'root'`?**
+> This makes the service a singleton shared across the entire application. Angular's tree-shakable providers ensure unused services are removed from production builds.
 
 **Result**:
-> We provided a Movie service at the default root level, Angular creates a single, shared instance of our service and injects it into any class that asks for it.
-> The movies will now be retreived from a reusable singleton service. The service is responsible of fetching and returning the requested movies.
-> How the service does that is not important to the components that use it.
+> Movie data is now managed by a dedicated service. Components request data through the service interface without knowing implementation details. This follows the Single Responsibility Principle and makes the code more maintainable.
