@@ -2,14 +2,7 @@
   {{ title() }}
 </h1>
 
-<ul>
-  @for (movie of movies(); track movie.id) {
-    <li>
-      {{ movie.name }} - Rating: {{ movie.rating }}
-      <button (click)="onMovieClicked(movie)">view..</button>
-    </li>
-  }
-</ul>
+<cw-movie-list [movies]="movies()" (movieClicked)="onMovieSelected($event)"></cw-movie-list>
 
 @if (selectedMovie()) {
   <cw-movie-detail [movie]="selectedMovie()!"></cw-movie-detail>

@@ -1,10 +1,11 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { Movie } from './movies/movie.interface';
 import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
+import { MovieListComponent } from './movies/movie-list/movie-list.component';
 
 @Component({
     selector: 'app-root',
-    imports: [MovieDetailComponent],
+    imports: [MovieDetailComponent, MovieListComponent],
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
     ]);
   }
 
-  onMovieClicked(movie: Movie): void {
+  onMovieSelected(movie: Movie): void {
     this.selectedMovie.set(movie);
   }
 }
