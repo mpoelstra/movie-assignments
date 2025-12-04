@@ -28,6 +28,6 @@ export class MoviesComponent implements OnInit {
   }
 
   onMovieSelected(movie: Movie): void {
-    this.selectedMovie.set(movie);
+    this.selectedMovie.set({ ...movie });
   }
 }

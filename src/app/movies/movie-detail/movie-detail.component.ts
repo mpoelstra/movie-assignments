@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Movie } from '../movie.interface';
 
 @Component({
   selector: 'cw-movie-detail',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './movie-detail.component.html',
   styleUrl: './movie-detail.component.scss',
 })
