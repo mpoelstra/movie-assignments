@@ -18,7 +18,7 @@ Assignment 5: Creating a movie list component
   - Hint: Use `input.required<Movie[]>()`.
 
 - Create an output property `movieClicked` that will emit a Movie.
-  - Hint: Use `output<Movie>()` to create a type-safe event emitter.
+  - Hint: Use `output<Movie>()`.
 
 - Copy the list HTML from the app component to the movie-list template.
 - Create a function `onMovieClicked` in the movie-list component which accepts a movie as parameter.

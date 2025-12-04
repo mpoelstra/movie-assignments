@@ -26,4 +26,4 @@ Assignment 1: Displaying a list of movies
   - Display the name and rating for each movie using interpolation.
 
 **Result**:
-> We now have a component that displays a list of movies using signals and the modern @for syntax.
+> We now have a component that displays a list of movies using signals and the @for syntax.

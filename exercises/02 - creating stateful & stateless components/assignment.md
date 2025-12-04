@@ -21,4 +21,4 @@ Assignment 2: Creating a movie typed object
 - Verify there are no TypeScript errors. If any errors occur, ensure all movie objects have the correct properties.
 
 **Result**:
-> We now have a strongly typed interface for movies, providing better type safety and autocomplete support.
+> We now have a typed interface for movies, providing type safety and autocomplete support.

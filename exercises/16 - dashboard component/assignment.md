@@ -1,12 +1,11 @@
-Assignment 16: Dashboard feature with routing
+Assignment 16: Dashboard component with routing
 ==============================================
 
 > ## Create a dashboard component that displays favorite movies with its own route
 
 **Links**:
-- [Feature Modules](https://angular.io/guide/feature-modules)
-- [Lazy Loading](https://angular.io/guide/lazy-loading-ngmodules)
 - [Router Configuration](https://angular.io/api/router/Route)
+- [Lazy Loading](https://angular.io/guide/lazy-loading-ngmodules)
 
 **Steps**:
 - Generate a new standalone component: `ng g component dashboard --skip-tests`
