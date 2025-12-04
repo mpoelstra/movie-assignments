@@ -9,55 +9,25 @@ Assignment 3: Showing movie details
 - [Event Binding](https://angular.io/guide/event-binding)
 
 **Steps**:
-- Add a public signal property `selectedMovie` to the app component with type `Movie | undefined`:
-```typescript
-selectedMovie = signal<Movie | undefined>(undefined);
-```
-> Using `undefined` as the initial value indicates no movie is selected yet. This is better than using `null` for consistency with TypeScript's strict null checks.
+- Add a public signal property `selectedMovie` to the app component with type `Movie | undefined`.
+  - Hint: Initialize it with `undefined` to indicate no movie is selected yet.
 
-- Add a function `onMovieClicked` to handle movie selection:
-```typescript
-onMovieClicked(movie: Movie): void {
-  this.selectedMovie.set(movie);
-}
-```
-> This function updates the signal with the selected movie, automatically triggering a view update.
+- Add a function `onMovieClicked` to the app component class.
+  - The function should accept a movie as parameter.
+  - Use the `.set()` method to assign the movie parameter to the `selectedMovie` signal.
 
 - Create a movie detail view in the app component template:
-  - Add a `div` element for the details section
-  - Inside the div, add:
-    - An `<h2>` element displaying the movie name
-    - Separate `<div>` elements for id, genre, and rating
-```html
-<div>
-  <h2>{{ selectedMovie()!.name }}</h2>
-  <div>ID: {{ selectedMovie()!.id }}</div>
-  <div>Genre: {{ selectedMovie()!.genre }}</div>
-  <div>Rating: {{ selectedMovie()!.rating }}</div>
-</div>
-```
-> The `!` operator (non-null assertion) tells TypeScript we're certain the value exists here.
+  - Add a `div` element.
+  - Insert a header element `<h2>` into the `div` and display the name of the `selectedMovie` object.
+  - Insert a `<div>` element beneath the header for each remaining property (id, genre, rating) and display the value.
+  - Remember to call selectedMovie as a function: `selectedMovie()`
+  - Use the `!` operator to tell TypeScript the value exists (non-null assertion).
 
-- Add a button to each movie list item:
-```html
-@for (movie of movies(); track movie.id) {
-  <li>
-    {{ movie.name }} - Rating: {{ movie.rating }}
-    <button (click)="onMovieClicked(movie)">view..</button>
-  </li>
-}
-```
+- Insert a `button` element into the movie list `<li>` element with the text 'view..'.
+- Add an event binding to the button `click` event, bind it to the `onMovieClicked` function and supply the clicked movie as parameter.
 
-- Wrap the details div with an `@if` block to show it only when a movie is selected:
-```html
-@if (selectedMovie()) {
-  <div>
-    <h2>{{ selectedMovie()!.name }}</h2>
-    <!-- ... rest of details -->
-  </div>
-}
-```
-> The `@if` block is Angular's modern control flow syntax, replacing `*ngIf`. It's more efficient and easier to read.
+- Add an `@if` block to the details `div` to conditionally hide the details when no movie has been selected yet.
+> The `@if` block is Angular's modern control flow syntax, replacing `*ngIf`.
 
 **Result**:
-> The view now shows movie details when a movie is clicked. The `@if` block conditionally displays the details only after selection, and signals ensure reactive updates throughout the component.
+> The view now shows movie details when a movie is clicked. The `@if` block conditionally displays the details only after selection.

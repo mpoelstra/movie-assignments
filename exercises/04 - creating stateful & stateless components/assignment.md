@@ -9,66 +9,23 @@ Assignment 4: Creating a movie detail component
 - [Smart vs Presentational Components](https://angular.io/guide/styleguide#presentational-and-container-component-pattern)
 
 **Steps**:
-- Generate a new component in the `movies` folder:
-```bash
-ng g component movies/movie-detail --skip-tests
-```
-> The `--skip-tests` flag is optional. Use it if you want to focus on implementation first and add tests later.
+- Create a new component in the `movies` folder using the angular-cli generator command `ng g component movies/movie-detail --skip-tests` in the integrated terminal.
+  - Notice the generated component is a standalone component with selector `cw-movie-detail`.
 
-- Notice the generated component is a standalone component with:
-  - Selector: `cw-movie-detail`
-  - Empty imports array
-  - Separate template and style files
+- Import the angular `input` function from @angular/core and create a required input property `movie` of type `Movie`.
+  - Hint: Use `input.required<Movie>()` to create a signal-based input.
+> `input.required()` provides better type safety than optional inputs.
 
-- Import the `input` function and the `Movie` interface:
-```typescript
-import { Component, input } from '@angular/core';
-import { Movie } from '../movie.interface';
-```
+- Copy the movie detail HTML from the app component template to the movie detail component template.
+  - Make sure the property bindings are set to the movie property and called as a function: `movie()`.
 
-- Create a required input signal for the movie:
-```typescript
-export class MovieDetailComponent {
-  movie = input.required<Movie>();
-}
-```
-> `input.required()` creates a signal-based input that must be provided by the parent component. It provides better type safety than optional inputs.
+- Replace the detail HTML in the app component template with the movie detail component.
+  - Use the movie detail component by adding a `<cw-movie-detail>` element.
+  - Add a property binding to the element that binds the input property `movie` to the `selectedMovie()!` of the app component.
+  - If you still have the `@if` in the detail component, move it back to the app component HTML. A parent component is responsible for when and if a child is displayed.
 
-- Copy the movie detail HTML from the app component to `movie-detail.component.html`:
-```html
-<div>
-  <h2>{{ movie().name }}</h2>
-  <div>ID: {{ movie().id }}</div>
-  <div>Genre: {{ movie().genre }}</div>
-  <div>Rating: {{ movie().rating }}</div>
-</div>
-```
-> Note: Access the movie input as `movie()` since it's a signal.
-
-- Update the app component to use the new component:
-  - Import `MovieDetailComponent` in `app.component.ts`:
-```typescript
-import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
-```
-  - Add it to the imports array:
-```typescript
-@Component({
-  selector: 'app-root',
-  imports: [MovieDetailComponent],
-  // ...
-})
-```
-
-- Replace the detail HTML in `app.component.html` with the component:
-```html
-@if (selectedMovie()) {
-  <cw-movie-detail [movie]="selectedMovie()!"></cw-movie-detail>
-}
-```
-> Keep the `@if` in the parent component. Parent components should control when child components are displayed.
-
-**Architecture Note**:
-> MovieDetailComponent is a "presentational" (dumb) component - it receives data via inputs and displays it. It doesn't manage state or fetch data. This makes it reusable and easier to test.
+- Make sure the AppComponent knows the MovieDetailComponent.
+  - Add the movie-detail component to the imports array of app.component.ts.
 
 **Result**:
-> The view still shows movie details, but now through a reusable, testable, presentational component. The app component acts as a "container" (smart) component managing state.
+> The view will still show the details of the movie, but now via a reusable presentational component.
