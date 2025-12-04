@@ -1,4 +1,5 @@
 import { Component, signal, OnInit } from '@angular/core';
+import { Movie } from './movies/movie.interface';
 
 @Component({
     selector: 'app-root',
@@ -8,7 +9,7 @@ import { Component, signal, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = signal('App works!');
-  movies = signal<any[]>([]);
+  movies = signal<Movie[]>([]);
 
   ngOnInit(): void {
     this.movies.set([
