@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, retry, map } from 'rxjs/operators';
 import { Movie } from './movie.interface';
 
 @Injectable({
@@ -26,6 +26,15 @@ export class MovieService {
       catchError(this.handleError)
     );
     return result;
+  }
+
+  updateMovie(movie: Movie): Observable<Movie> {
+    const url = `${this.moviesUrl}/${movie.id}`;
+    const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    return this.http.put<Movie>(url, movie, options).pipe(
+      map(() => movie),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: any): Observable<never> {

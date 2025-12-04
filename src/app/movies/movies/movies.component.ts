@@ -16,6 +16,10 @@ export class MoviesComponent implements OnInit {
   selectedMovie = signal<Movie | undefined>(undefined);
 
   ngOnInit(): void {
+    this.getMovies();
+  }
+
+  getMovies(): void {
     const result = this.movieService.getMovies();
     result.subscribe({
       next: (movies: Movie[]) => {
@@ -29,5 +33,17 @@ export class MoviesComponent implements OnInit {
 
   onMovieSelected(movie: Movie): void {
     this.selectedMovie.set({ ...movie });
+  }
+
+  onMovieSaved(movie: Movie): void {
+    this.movieService.updateMovie(movie).subscribe({
+      next: () => {
+        console.log('success');
+        this.getMovies();
+      },
+      error: (err: Error) => {
+        console.error('Error saving movie:', err);
+      }
+    });
   }
 }

@@ -1,5 +1,5 @@
 <cw-movie-list [movies]="movies()" (movieClicked)="onMovieSelected($event)"></cw-movie-list>
 
 @if (selectedMovie()) {
-  <cw-movie-detail [movie]="selectedMovie()!"></cw-movie-detail>
+  <cw-movie-detail [movie]="selectedMovie()!" (save)="onMovieSaved($event)"></cw-movie-detail>
 }
