@@ -10,6 +10,7 @@ import { Movie } from './movies/movie.interface';
 export class AppComponent implements OnInit {
   title = signal('App works!');
   movies = signal<Movie[]>([]);
+  selectedMovie = signal<Movie | undefined>(undefined);
 
   ngOnInit(): void {
     this.movies.set([
@@ -19,5 +20,9 @@ export class AppComponent implements OnInit {
       { id: 4, name: 'Pulp Fiction', genre: 'Crime', rating: 8.9 },
       { id: 5, name: 'Forrest Gump', genre: 'Drama', rating: 8.8 }
     ]);
+  }
+
+  onMovieClicked(movie: Movie): void {
+    this.selectedMovie.set(movie);
   }
 }

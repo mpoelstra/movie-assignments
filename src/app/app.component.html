@@ -4,6 +4,18 @@
 
 <ul>
   @for (movie of movies(); track movie.id) {
-    <li>{{ movie.name }} - Rating: {{ movie.rating }}</li>
+    <li>
+      {{ movie.name }} - Rating: {{ movie.rating }}
+      <button (click)="onMovieClicked(movie)">view..</button>
+    </li>
   }
 </ul>
+
+@if (selectedMovie()) {
+  <div>
+    <h2>{{ selectedMovie()!.name }}</h2>
+    <div>ID: {{ selectedMovie()!.id }}</div>
+    <div>Genre: {{ selectedMovie()!.genre }}</div>
+    <div>Rating: {{ selectedMovie()!.rating }}</div>
+  </div>
+}
