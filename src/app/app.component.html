@@ -1,3 +1,9 @@
 <h1>
   {{ title() }}
 </h1>
+
+<ul>
+  @for (movie of movies(); track movie.id) {
+    <li>{{ movie.name }} - Rating: {{ movie.rating }}</li>
+  }
+</ul>
