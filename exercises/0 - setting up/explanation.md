@@ -8,7 +8,7 @@ Angular training
 **Assignment structure**:
 - Each assignment has its own folder in the exercises folder
 - An assignment folder contains:
-  - An `assignment.md` file where the assigment itself is described.
+  - An `assignment<number>.md` file where the assigment itself is described.
   - Sometimes an `explanation.md` file that gives further explanation if needed.
   - Sometimes other files to support the assignment.
 
