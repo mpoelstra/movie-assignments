@@ -8,7 +8,7 @@ Assignment 6: Organizing components into feature modules
 - [Feature Organization](https://angular.io/guide/styleguide#folders-by-feature-structure)
 
 **Steps**:
-- Generate a movies component for all the movie functionality with the angular-cli command `ng g component movies/movies --skip-tests`.
+- Generate a movies component for all the movie functionality with the angular-cli command `ng g component movies/movies --flat --skip-tests`.
 
 - Move all movie functionality from the app component to the movies component.
   - Move any movie imports, properties and functions from the app component to the movies component.

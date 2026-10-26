@@ -19,6 +19,8 @@ Assignment 1: Displaying a list of movies
   - In the `ngOnInit` method, use the `.set()` method to populate the movies signal with an array of movie objects.
   - A movie object should have: `id` (number), `name` (string), `genre` (string), `rating` (number).
 
+> Before signals, initializing component state in `ngOnInit` was a common Angular pattern. Data often came from inputs or services, so initialization was kept separate from property declarations and constructors. It was not required for a static array, but you will still encounter this pattern in many existing Angular codebases.
+
 - Create an unordered list `<ul>` in the app component template.
 - Use the `@for` control flow syntax to loop over the movies and create list items.
   - Don't forget to call the signal as a function: `movies()`
@@ -27,3 +29,11 @@ Assignment 1: Displaying a list of movies
 
 **Result**:
 > We now have a component that displays a list of movies using signals and the @for syntax.
+
+**Bonus: Initialize without `ngOnInit`**:
+- Remove the `OnInit` interface and the `ngOnInit` method.
+- Initialize the `movies` signal directly when declaring the property.
+- Verify that the application behaves exactly the same.
+- Consider when `ngOnInit` would still be useful.
+
+> Signals do not replace Angular lifecycle hooks. In this example, no lifecycle hook is needed because the initial value is immediately available.

@@ -28,7 +28,7 @@ Assignment 8: Getting movies from HTTP
 > HttpClient returns an `Observable` - a stream of data over time. The generic type `<Movie[]>` tells TypeScript what data the server will return.
 
 - Add error handling and retry logic:
-  - Import `catchError` and `retry` from `'rxjs/operators'`.
+  - Import `catchError` and `retry` from `'rxjs'`.
   - Use `.pipe()` to chain `retry(2)` and `catchError(this.handleError)` to the get call.
   - Create a private `handleError` method that logs the error and returns `throwError` (import from 'rxjs').
 

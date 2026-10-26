@@ -18,7 +18,7 @@ Assignment 3: Showing movie details
 
 - Add an `@if` block to the details section to conditionally hide the details when no movie has been selected yet.
   - Inside the `@if` block, you can alias the signal value to avoid using the non-null assertion operator.
-  - Hint: `@if (selectedMovie(); as movie)` allows you to work with `movie` directly.
+  - Hint: `@if (selectedMovie(); as movie)` allows you to work with `movie` directly. Angular's template type checker narrows the alias from `Movie | undefined` to `Movie` inside the block, so properties and required inputs can be used safely without a non-null assertion.
 
 - Create a movie detail view inside the `@if` block:
   - Add a `div` element.
