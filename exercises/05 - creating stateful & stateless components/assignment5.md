@@ -8,6 +8,7 @@ Assignment 5: Creating a movie list component
 - [Component Input Signals](https://angular.dev/guide/components/inputs)
 - [Component Output Functions](https://angular.dev/guide/components/outputs)
 - [Angular Components](https://angular.dev/guide/components)
+- [Array.prototype.sort()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
 **Steps**:
 - Create a new component in the `movies` folder using the angular-cli generator command `ng g component movies/movie-list --skip-tests`.
@@ -17,10 +18,14 @@ Assignment 5: Creating a movie list component
 - Create a required input signal `movies` with the typing array of `Movie`.
   - Hint: Use `input.required<Movie[]>()`.
 
+- Import `computed` and create a `sortedMovies` computed signal that sorts the movies by rating without changing the input array.
+  - Hint: Create a copy of `this.movies()` before sorting it.
+> `sort()` changes the original array. Sorting a copy prevents the child component from changing state owned by its parent. The computed signal recalculates automatically when the `movies` input changes.
+
 - Create an output property `movieClicked` that will emit a Movie.
   - Hint: Use `output<Movie>()`.
 
-- Copy the list HTML from the app component to the movie-list template.
+- Copy the list HTML from the app component to the movie-list template and loop over `sortedMovies()`.
 - Create a function `onMovieClicked` in the movie-list component which accepts a movie as parameter.
 - The click event of the buttons in the `movie-list.component.html` should now be bound to the `onMovieClicked` function of the movie-list component.
 - Use the `movieClicked` output property to emit an event and supply the clicked movie as event value.
