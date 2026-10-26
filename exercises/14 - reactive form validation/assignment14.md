@@ -42,4 +42,4 @@ Assignment 14: Reactive form validation
 
 **Result**:
 > We now have a reactive form with comprehensive validation. The programmatic approach provides more control and testability compared to template-driven forms.
-> Next, we'll implement routing in assignment 15.
+> Next, we'll rebuild the movie form with Signal Forms in assignment 15.
