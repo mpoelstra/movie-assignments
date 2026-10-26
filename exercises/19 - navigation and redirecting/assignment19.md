@@ -1,4 +1,4 @@
-Assignment 18: Navigation links and active route highlighting
+Assignment 19: Navigation links and active route highlighting
 ==============================================
 
 > ## Add navigation links to switch between dashboard and movies views with visual feedback
@@ -39,4 +39,4 @@ Assignment 18: Navigation links and active route highlighting
 > The application now has fully functional navigation between dashboard and movies views with clear visual feedback showing which view is currently active.
 
 **Congratulations!**
-> You've completed all 18 Angular assignments! You've learned components, services, HTTP, forms, and routing using modern Angular 22 patterns.
+> You've completed all 19 Angular assignments! You've learned components, services, HTTP, forms, and routing using modern Angular 22 patterns.

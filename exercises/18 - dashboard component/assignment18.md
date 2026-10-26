@@ -1,4 +1,4 @@
-Assignment 17: Dashboard component with routing
+Assignment 18: Dashboard component with routing
 ==============================================
 
 > ## Create a dashboard component that displays favorite movies with its own route
@@ -35,4 +35,4 @@ Assignment 17: Dashboard component with routing
 
 **Result**:
 > We now have a dashboard component displaying favorite movies, accessible via its own route. The application has two main views.
-> Next, in assignment 18, we'll add navigation links to easily switch between views.
+> Next, in assignment 19, we'll add navigation links to easily switch between views.

@@ -1,4 +1,4 @@
-Assignment 16: Routing between views
+Assignment 17: Routing between views
 ==============================================
 
 > ## Configure routing to navigate between different views in the application
@@ -41,4 +41,4 @@ Assignment 16: Routing between views
 
 **Result**:
 > The application now uses routing to display different views. The root URL redirects to the movies route.
-> In assignment 17, we'll create a dashboard component with its own route.
+> In assignment 18, we'll create a dashboard component with its own route.
