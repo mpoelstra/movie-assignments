@@ -4,9 +4,9 @@ Assignment 4: Creating a movie detail component
 > ## Create a new reusable component that shows the details of a movie and use it in the app component
 
 **Links**:
-- [Angular CLI Component Generation](https://angular.io/cli/generate#component)
+- [Angular CLI Component Generation](https://angular.dev/cli/generate/component)
 - [Component Input Signals](https://angular.dev/guide/components/inputs)
-- [Smart vs Presentational Components](https://angular.io/guide/styleguide#presentational-and-container-component-pattern)
+- [Keep Components Focused on Presentation](https://angular.dev/style-guide#keep-components-and-directives-focused-on-presentation)
 
 **Steps**:
 - Create a new component in the `movies` folder using the angular-cli generator command `ng g component movies/movie-detail --skip-tests` in the integrated terminal.

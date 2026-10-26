@@ -6,7 +6,7 @@ Assignment 1: Displaying a list of movies
 **Links:**
 - [HTML Lists](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)
 - [TypeScript Basic Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
-- [Angular Components](https://angular.io/guide/component-overview)
+- [Angular Components](https://angular.dev/guide/components)
 - [Angular Signals](https://angular.dev/guide/signals)
 - [Angular @for block](https://angular.dev/api/core/@for)
 

@@ -4,9 +4,9 @@ Assignment 3: Showing movie details
 > ## Add a detail view to the app component that shows the details of the movie selected in the list 
 
 **Links**:
-- [Angular Templates](https://angular.io/guide/template-syntax)
+- [Angular Templates](https://angular.dev/guide/templates)
 - [Angular @if block](https://angular.dev/api/core/@if)
-- [Event Binding](https://angular.io/guide/event-binding)
+- [Event Binding](https://angular.dev/guide/templates/event-listeners)
 
 **Steps**:
 - Add a public signal property `selectedMovie` to the app component with type `Movie | undefined`.

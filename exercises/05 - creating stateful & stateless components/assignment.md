@@ -4,10 +4,10 @@ Assignment 5: Creating a movie list component
 > ## Create a new reusable component that shows a list of movies and use it in the app component
 
 **Links**:
-- [Angular CLI Component Generation](https://angular.io/cli/generate#component)
+- [Angular CLI Component Generation](https://angular.dev/cli/generate/component)
 - [Component Input Signals](https://angular.dev/guide/components/inputs)
 - [Component Output Functions](https://angular.dev/guide/components/outputs)
-- [Component Communication](https://angular.io/guide/component-interaction)
+- [Angular Components](https://angular.dev/guide/components)
 
 **Steps**:
 - Create a new component in the `movies` folder using the angular-cli generator command `ng g component movies/movie-list --skip-tests`.

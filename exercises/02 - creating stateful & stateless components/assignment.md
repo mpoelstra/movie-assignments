@@ -6,7 +6,7 @@ Assignment 2: Creating a movie typed object
 **Links**:
 - [TypeScript Interfaces](https://www.typescriptlang.org/docs/handbook/2/objects.html)
 - [TypeScript Modules](https://www.typescriptlang.org/docs/handbook/2/modules.html)
-- [Angular Style Guide - Interfaces](https://angular.io/guide/styleguide#interfaces)
+- [Angular Style Guide](https://angular.dev/style-guide)
 
 **Steps**:
 - Create a new folder in the `src/app` folder and name it `movies`.

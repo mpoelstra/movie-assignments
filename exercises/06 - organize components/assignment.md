@@ -4,8 +4,8 @@ Assignment 6: Organizing components into feature modules
 > ## Extract movie functionality into a dedicated container component
 
 **Links**:
-- [Angular Component Organization](https://angular.io/guide/styleguide#component-structure)
-- [Feature Organization](https://angular.io/guide/styleguide#folders-by-feature-structure)
+- [Group Related Files Together](https://angular.dev/style-guide#group-closely-related-files-together-in-the-same-directory)
+- [Organize by Feature Areas](https://angular.dev/style-guide#organize-your-project-by-feature-areas)
 
 **Steps**:
 - Generate a movies component for all the movie functionality with the angular-cli command `ng g component movies/movies --flat --skip-tests`.
