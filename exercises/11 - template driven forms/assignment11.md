@@ -38,7 +38,9 @@ Assignment 11: Template-driven forms
 - Update the `onSaveClicked` function signature to accept a `value` parameter of type `any`.
 - Inside `onSaveClicked`, create a new `Movie` object by combining the current movie with the form values, then emit it.
   - Hint: `const movie = { ...this.movie(), ...value };`
+  
 > Spreading the current movie first preserves properties that are not part of the form, such as `id`. Spreading `value` afterwards replaces the editable properties with their submitted form values.
+
 > A `<button>` inside a `<form>` has `submit` as its default type when the `type` attribute is omitted. Set `type="submit"` explicitly to make this behavior intentional and clear. A submit button triggers the form's native `submit` event, which Angular exposes as `ngSubmit`; this also allows the form to be submitted by pressing Enter. A button with `type="button"` only handles its own click and does not trigger `ngSubmit`.
 
 **Extra**:

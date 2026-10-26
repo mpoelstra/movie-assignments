@@ -17,15 +17,19 @@ Assignment 12: Template-driven form validation
 - Add HTML validation attributes to the input fields:
   - Add `required` and `minlength="4"` to the name input.
   - Add `required` to the genre input.
-  - Add `required`, `min="0"`, and `max="10"` to the rating input.
+  - Make sure the rating input uses `type="number"`, then add `required`, `min="0"`, and `max="10"`.
+> Angular's built-in `min` and `max` validators apply to numeric inputs. When the rating input uses `type="text"`, these attributes do not produce `min` or `max` validation errors.
 
-- Add template reference variables to each input that assign the ngModel.
-  - Hint: `#nameInput="ngModel"` for the name field.
-> Angular tracks validation state on the ngModel and exposes it through the template reference variable.
+- Access each control directly through `movieForm.controls` using the `name` attributes added in assignment 11.
+  - Hint: Use `movieForm.controls['name']`, `movieForm.controls['genre']`, and `movieForm.controls['rating']`.
+> Angular registers each `ngModel` control in `movieForm.controls` under its `name` attribute, so additional template reference variables are not needed.
+
+- Display `movieForm.valid` in the template and observe how its value changes while editing the form.
+  - Hint: `Form valid: {{ movieForm.valid }}`
 
 - Create error message spans below each input field using `@if` blocks:
-  - Check for errors using the `errors` property: `nameInput.errors?.['required']`
-  - Also check if the field has been touched: `nameInput.touched`
+  - Check for errors using the `errors` property: `movieForm.controls['name']?.errors?.['required']`
+  - Also check if the field has been touched: `movieForm.controls['name']?.touched`
   - Display appropriate error messages for each validation rule.
 
 - Prevent form submission when invalid:
