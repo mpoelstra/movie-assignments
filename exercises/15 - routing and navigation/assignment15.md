@@ -4,11 +4,11 @@ Assignment 15: Routing between views
 > ## Configure routing to navigate between different views in the application
 
 **Links**:
-- [Angular Router Guide](https://angular.io/guide/router)
-- [Routing Tutorial](https://angular.io/guide/router-tutorial)
-- [Route Configuration](https://angular.io/api/router/Route)
-- [Router Outlet](https://angular.io/api/router/RouterOutlet)
-- [provideRouter](https://angular.io/api/router/provideRouter)
+- [Angular Router Guide](https://angular.dev/guide/routing)
+- [Define Routes](https://angular.dev/guide/routing/define-routes)
+- [Route Configuration](https://angular.dev/api/router/Route)
+- [Router Outlet](https://angular.dev/api/router/RouterOutlet)
+- [provideRouter](https://angular.dev/api/router/provideRouter)
 
 **Background**:
 > Angular's router enables navigation between different views. In modern Angular, we use the `provideRouter` function instead of RouterModule imports.

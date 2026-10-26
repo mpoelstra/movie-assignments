@@ -4,9 +4,9 @@ Assignment 12: Template-driven form validation
 > ## Add validation rules and error messages to the template-driven form
 
 **Links**:
-- [Form Validation Guide](https://angular.io/guide/form-validation)
-- [Template-driven Validation](https://angular.io/guide/forms#add-validation)
-- [NgModel Directive](https://angular.io/api/forms/NgModel)
+- [Form Validation Guide](https://angular.dev/guide/forms/form-validation)
+- [Template-driven Validation](https://angular.dev/guide/forms/form-validation#validating-input-in-template-driven-forms)
+- [NgModel Directive](https://angular.dev/api/forms/NgModel)
 
 **Validation Rules**:
 - Name: required, minimum length of 4 characters

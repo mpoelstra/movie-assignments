@@ -4,9 +4,9 @@ Assignment 17: Navigation links and active route highlighting
 > ## Add navigation links to switch between dashboard and movies views with visual feedback
 
 **Links**:
-- [RouterLink Directive](https://angular.io/api/router/RouterLink)
-- [RouterLinkActive Directive](https://angular.io/api/router/RouterLinkActive)
-- [Router Navigation](https://angular.io/guide/router#router-links)
+- [RouterLink Directive](https://angular.dev/api/router/RouterLink)
+- [RouterLinkActive Directive](https://angular.dev/api/router/RouterLinkActive)
+- [Router Navigation](https://angular.dev/guide/routing/navigate-to-routes#how-to-use-routerlink)
 
 **Steps**:
 - Add navigation to the app component template:

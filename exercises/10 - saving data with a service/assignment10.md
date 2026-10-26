@@ -4,8 +4,8 @@ Assignment 10: Saving data with HTTP PUT
 > ## Add the ability to save edited movie data back to the server
 
 **Links**:
-- [Angular HttpClient](https://angular.io/guide/http)
-- [HTTP PUT Request](https://angular.io/guide/http#making-a-put-request)
+- [Angular HttpClient](https://angular.dev/guide/http)
+- [Mutating Server State](https://angular.dev/guide/http/making-requests#mutating-server-state)
 - [RxJS Operators](https://rxjs.dev/guide/operators)
 
 **Steps**:
@@ -13,13 +13,8 @@ Assignment 10: Saving data with HTTP PUT
 - Create a local variable `url` in `updateMovie` that combines the `moviesUrl` with `/` and `movie.id`.
   - Hint: Use template literals: `` `${this.moviesUrl}/${movie.id}` ``
 
-- Create an `options` variable with HTTP headers:
-  - Import `HttpHeaders` from `@angular/common/http`.
-  - Set value: `{ headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }`
-
-- Call the `put` function on the `http` service with `url`, `movie`, and `options` as parameters.
-- Use `.pipe()` with `map()` to return the movie (the server may return empty).
-  - Import `map` from `'rxjs/operators'`.
+- Give `updateMovie` the return type `Observable<void>` because this API returns no response body after a successful update.
+- Call the `put<void>` function on the `http` service with `url`, `movie`, and `options` as parameters.
 - Add `catchError(this.handleError)` to the pipe chain.
 - Let the `updateMovie` function return the Observable result.
 
@@ -32,9 +27,9 @@ Assignment 10: Saving data with HTTP PUT
   - Extract the code from `ngOnInit` to a new `getMovies()` function.
   - Call `getMovies()` in `ngOnInit`.
   - Create an `onMovieSaved(movie: Movie)` function that calls `movieService.updateMovie(movie)`.
-  - Subscribe to the result and call `getMovies()` in the `next` handler to refresh the list.
+  - Subscribe and call `getMovies()` in the `next` handler to refresh the list. The `next` handler receives no value, but it is still called when the request succeeds.
 
-- Update the movie-detail component usage in movies template to bind the save event:
+- Bind to the `save` event in the movie list component, this event is emitted by moviedetail:
   - Add `(save)="onMovieSaved($event)"` to the `<cw-movie-detail>` element.
 
 **Understanding the Data Flow**:

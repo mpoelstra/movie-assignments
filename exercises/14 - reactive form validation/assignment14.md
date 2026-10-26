@@ -4,9 +4,9 @@ Assignment 14: Reactive form validation
 > ## Add validation rules and error messages to the reactive form
 
 **Links**:
-- [Reactive Form Validation](https://angular.io/guide/form-validation#reactive-form-validation)
-- [Validators Class](https://angular.io/api/forms/Validators)
-- [FormControl Validation](https://angular.io/guide/form-validation#validating-input-in-reactive-forms)
+- [Reactive Form Validation](https://angular.dev/guide/forms/form-validation#validating-input-in-reactive-forms)
+- [Validators Class](https://angular.dev/api/forms/Validators)
+- [FormControl Validation](https://angular.dev/guide/forms/reactive-forms#validating-form-input)
 
 **Validation Rules**:
 - Name: required, minimum length of 4 characters
