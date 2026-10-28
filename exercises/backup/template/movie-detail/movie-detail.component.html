@@ -1,0 +1,22 @@
+@if (movie(); as movie) {
+  <form novalidate #movieForm="ngForm" (ngSubmit)="onSaveClicked(movieForm.value, movieForm.valid)">
+  <h2>Selected Movie</h2>
+  <p><label for="movieName">Name:</label><input required minlength="4" id="movieName" name="name" type="text" [ngModel]="movie.name" /> Name: {{ movie.name }}</p>
+  <p><label for="movieGenre">Genre:</label><input required id="movieGenre" name="genre" type="text" [ngModel]="movie.genre" /> Genre: {{ movie.genre }}</p>
+  <p><label for="movieRating">Rating:</label><input required min="0" max="10" id="movieRating" name="rating" type="number" [ngModel]="movie.rating" /> Rating: {{ movie.rating }}</p>
+  <p><button type="submit">Save Movie</button></p>
+  </form>
+  <div>
+    {{ movieForm.value | json }}
+  </div>
+  <div>Form valid: {{ movieForm.valid }}</div>
+  <div>
+    Name errors: {{ movieForm.controls['name']?.errors | json }}
+  </div>
+  <div>
+    Genre errors: {{ movieForm.controls['genre']?.errors | json }}
+  </div>
+  <div>
+    Rating errors: {{ movieForm.controls['rating']?.errors | json }}
+  </div>
+}

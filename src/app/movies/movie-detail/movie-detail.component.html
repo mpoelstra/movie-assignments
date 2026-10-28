@@ -1,0 +1,9 @@
+@if (movie(); as movie) {
+  <form (submit)="onSaveClicked($event)">
+  <h2>Selected Movie</h2>
+  <p><label for="movieName">Name:</label><input id="movieName" type="text" [formField]="movieForm.name" /> Name: {{ movie.name }}</p>
+  <p><label for="movieGenre">Genre:</label><input id="movieGenre" type="text" [formField]="movieForm.genre" /> Genre: {{ movie.genre }}</p>
+  <p><label for="movieRating">Rating:</label><input id="movieRating" type="number" [formField]="movieForm.rating" /> Rating: {{ movie.rating }}</p>
+  <p><button type="submit">Save Movie</button></p>
+  </form>
+}

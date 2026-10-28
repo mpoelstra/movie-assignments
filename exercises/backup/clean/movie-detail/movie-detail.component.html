@@ -1,0 +1,7 @@
+@if (movie(); as movie) {
+  <h2>Selected Movie</h2>
+  <p><label for="movieName">Name:</label><input id="movieName" type="text" [(ngModel)]="movie.name" /> Name: {{ movie.name }}</p>
+  <p><label for="movieGenre">Genre:</label><input id="movieGenre" type="text" [(ngModel)]="movie.genre" /> Genre: {{ movie.genre }}</p>
+  <p><label for="movieRating">Rating:</label><input id="movieRating" type="text" [(ngModel)]="movie.rating" /> Rating: {{ movie.rating }}</p>
+  <p><button (click)="onSaveClicked(movie)">Save Movie</button></p>
+}

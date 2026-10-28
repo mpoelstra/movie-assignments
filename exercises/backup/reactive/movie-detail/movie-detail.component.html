@@ -1,0 +1,21 @@
+@if (movie(); as movie) {
+  <form [formGroup]="movieForm">
+  <h2>Selected Movie</h2>
+  <p><label for="movieName">Name:</label><input id="movieName" type="text" formControlName="name" /> Name: {{ movie.name }}</p>
+  <p><label for="movieGenre">Genre:</label><input id="movieGenre" type="text" formControlName="genre" /> Genre: {{ movie.genre }}</p>
+  <p><label for="movieRating">Rating:</label><input id="movieRating" type="text" formControlName="rating" /> Rating: {{ movie.rating }}</p>
+  <p><button (click)="onSaveClicked()">Save Movie</button></p>
+  </form>
+  <div>
+    {{ movieForm.value | json }}
+  </div>
+  <div>
+    Name errors: {{ movieForm.controls['name']?.errors | json }}
+  </div>
+  <div>
+    Genre errors: {{ movieForm.controls['genre']?.errors | json }}
+  </div>
+  <div>
+    Rating errors: {{ movieForm.controls['rating']?.errors | json }}
+  </div>
+}

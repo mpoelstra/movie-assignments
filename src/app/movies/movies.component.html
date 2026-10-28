@@ -1,0 +1,17 @@
+<!-- @if (moviesResource.isLoading()) {
+  <p>Loading movies...</p>
+} @else if (moviesResource.error(); as error) {
+  sdfsd
+  <p>{{ $any(error)?.body?.error }}</p>
+} @else if (moviesResource.hasValue()) {
+  <cw-movie-list
+    [movies]="moviesResource.value()"
+    (movieClicked)="onMovieSelected($event)"
+  />
+} -->
+
+<cw-movie-list [movies]="movies()" (movieClicked)="onMovieSelected($event)" />
+
+@if (selectedMovie(); as movie) {
+  <cw-movie-detail [movie]="movie" (save)="onMovieSaved($event)"></cw-movie-detail>
+}
